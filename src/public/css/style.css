@@ -1,35 +1,27 @@
-body {
-        background-color: #000000;
-        color: #ffffff;
-    }
+#all-messages {
+    background: #ece5dd;
+    padding: 15px;
+    height: 60vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-    .card {
-        border-radius: 1rem;
-        overflow: hidden;
-    }
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    word-break: break-word;
+}
 
-    .card-header {
-        background-color: #a3c4f3 !important;
-        color: #000000 !important;
-    }
+.message.sent {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
 
-    .btn-success {
-        background-color: #a3c4f3 !important;
-        border-color: #a3c4f3 !important;
-        color: #000000 !important;
-    }
-
-    .btn-success:hover {
-        background-color: #90b3e0 !important;
-        border-color: #90b3e0 !important;
-    }
-
-    input#username {
-        background-color: #333;
-        border: 1px solid #a3c4f3;
-        color: #ffffff;
-    }
-
-    input#username::placeholder {
-        color: #bbbbbb;
-    }
+.message.received {
+    align-self: flex-start;
+    background-color: #fff;
+}
