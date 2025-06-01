@@ -10,15 +10,6 @@ const httpServer = createServer(app);
 // Configuraciones
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-// Para servir index.html en la raíz
-app.get('/in', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-
-// Para servir register.html
-app.get('/register.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'register.html'));
-});
 app.use(cookieParser());
 
 // Rutas
