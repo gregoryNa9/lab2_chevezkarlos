@@ -6,7 +6,7 @@
 Este proyecto representa una mejora al sistema de chat implementado en la Tarea 2. Ahora, se ha incorporado una sección que muestra en tiempo real los usuarios conectados, permitiendo visualizar el estado de conexión en múltiples dispositivos o pestañas, al estilo de plataformas como WhatsApp o Telegram.
 
 Repositorio del proyecto:  
-🔗 [https://github.com/gregoryNa9/lab2_chevezkarlos.git](https://github.com/gregoryNa9/lab2_chevezkarlos.git)
+ [https://github.com/gregoryNa9/lab2_chevezkarlos.git](https://github.com/gregoryNa9/lab2_chevezkarlos.git)
 
 ---
 
