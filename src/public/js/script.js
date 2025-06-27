@@ -15,10 +15,20 @@ const send = document.querySelector("#send-message");
 const allMessages = document.querySelector("#all-messages");
 
 send.addEventListener("click", () => {
-  const message = document.querySelector("#message").value.trim();
-  if (message) {
+  const messageInput = document.querySelector("#message");
+  const message = messageInput.value.trim();
+
+  if (!message) {
+    alert("No puedes enviar un mensaje vacío.");
+    return;
+  }
+
+  try {
     socket.emit("message", { user: username, message });
-    document.querySelector("#message").value = "";
+    messageInput.value = "";
+  } catch (err) {
+    console.error("Error al enviar mensaje:", err.message);
+    alert("Ocurrió un error al enviar el mensaje.");
   }
 });
 
@@ -27,7 +37,6 @@ socket.on("message", ({ user, message }) => {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("d-flex", "mb-3");
 
-  // Alineación según usuario
   if (isOwn) {
     msgDiv.classList.add("justify-content-end");
   } else {
@@ -40,15 +49,20 @@ socket.on("message", ({ user, message }) => {
       background-color: ${isOwn ? '#a3c4f3' : '#2a2a2a'};
       color: ${isOwn ? 'black' : 'white'};
       border-radius: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      ">
-      <div class="fw-bold mb-1">${user}</div>
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+      <div class="fw-bold mb-1">${escapeHtml(user)}</div>
       <div>${escapeHtml(message)}</div>
     </div>
   `;
 
   allMessages.appendChild(msgDiv);
   allMessages.scrollTop = allMessages.scrollHeight;
+});
+
+// 🔒 Manejo de errores enviados desde el servidor
+socket.on("error", (err) => {
+  console.error("Error del servidor:", err.message);
+  alert(`Error: ${err.message}`);
 });
 
 socket.emit("new-user", username);
@@ -62,13 +76,10 @@ socket.on("user-list", (users) => {
   users.forEach(({ user, connected }) => {
     const userDiv = document.createElement("div");
     userDiv.textContent = user;
-
-    // Color verde si activo, rojo si desconectado
     userDiv.style.color = connected ? "#28a745" : "#dc3545";
     userDiv.style.fontWeight = connected ? "bold" : "normal";
     userDiv.classList.add("mb-2");
 
-    // Indicador pequeño al lado del nombre
     const statusDot = document.createElement("span");
     statusDot.style.width = "10px";
     statusDot.style.height = "10px";
@@ -82,7 +93,7 @@ socket.on("user-list", (users) => {
   });
 });
 
-// Tema toggle (igual que antes)
+// Cambiar tema (modo claro/oscuro)
 const toggleThemeBtn = document.getElementById("toggle-theme");
 if (toggleThemeBtn) {
   toggleThemeBtn.addEventListener("click", () => {
@@ -99,7 +110,7 @@ window.addEventListener("load", () => {
   document.documentElement.setAttribute("data-theme", savedTheme);
 });
 
-// Función para evitar inyección HTML en mensajes
+// 🧼 Sanitización de mensajes para prevenir XSS
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;

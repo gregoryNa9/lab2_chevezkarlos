@@ -1,12 +1,20 @@
 const login = document.querySelector("#login");
 
-// Verifica si el usuario ya está registrado
 login.addEventListener("click", () => {
-  const user = document.querySelector("#username").value.trim();
-  if (user !== "") {
+  const userInput = document.querySelector("#username");
+  const user = userInput.value.trim();
+
+  if (!user || user.length < 3) {
+    alert("Por favor ingresa un nombre válido (mínimo 3 caracteres).");
+    userInput.focus();
+    return;
+  }
+
+  try {
     document.cookie = `username=${user}; path=/`; 
-    document.location.href = "/";
-  } else {
-    alert("Por favor ingresa tu nombre de usuario");
+    window.location.href = "/";
+  } catch (err) {
+    console.error("Error al guardar nombre de usuario:", err.message);
+    alert("No se pudo guardar el nombre de usuario. Intenta de nuevo.");
   }
 });
