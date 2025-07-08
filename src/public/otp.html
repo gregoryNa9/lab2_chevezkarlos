@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Seguro</title>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+    <h2>OTP</h2>
+    <input id="otp" placeholder="Código OTP" />
+    <button onclick="verifyAndContinue()">Verificar y continuar</button>
+    <p id="otp-error" style="color:red;"></p>
+</body>
+
+<script>
+async function verifyAndContinue() {
+    const success = await verifyOTP(); // Supón que verifyOTP retorna true/false
+    if (success) {
+        window.location.href = 'chat.html';
+    } else {
+        document.getElementById('otp-error').textContent = 'Código OTP incorrecto';
+    }
+}
+</script>
+
+</html>

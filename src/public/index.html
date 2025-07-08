@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Seguro</title>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+    <h2>Login</h2>
+    <input id="login-user" placeholder="Usuario" />
+    <input id="login-pass" placeholder="Contraseña" type="password" />
+    <button onclick="window.location.href='login.html'">Ir a registro</button>
+    <button onclick="loginAndContinue()">Iniciar sesión y continuar</button>
+</body>
+
+<script>
+async function loginAndContinue() {
+    await login(); // Si login no es async, quita el await
+    window.location.href = 'otp.html';
+}
+</script>
+
+</html>

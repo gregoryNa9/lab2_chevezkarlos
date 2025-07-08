@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Seguro</title>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+    <h2>Registro</h2>
+    <input id="reg-user" placeholder="Usuario" />
+    <input id="reg-pass" placeholder="Contraseña" type="password" />
+    <select id="reg-role">
+        <option value="usuario">Usuario</option>
+        <option value="moderador">Moderador</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button onclick="register()">Registrarse</button>
+    <button onclick="window.location.href='index.html'">Iniciar sesión</button>
+</body>
+
+</html>
